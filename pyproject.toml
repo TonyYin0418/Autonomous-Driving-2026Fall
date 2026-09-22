@@ -1,0 +1,14 @@
+[project]
+name = "autonomous-driving-course"
+version = "0.1.0"
+description = "Local environment for the nuScenes and YOLO course exercises"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "nuscenes-devkit>=1.2.0",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "ultralytics>=8.3.0",
+]
+
+[tool.uv]
+package = false
