@@ -1,0 +1,12 @@
+场景: scene-0240
+sample token: ef856944c4f044bf83d60aaba314c1df
+坐标变换: LiDAR → Ego → Global → Ego → Camera → Image
+相机内参: [[1252.8131021185304, 0.0, 826.588114781398], [0.0, 1252.8131021185304, 469.9846626224581], [0.0, 0.0, 1.0]]
+CAM_FRONT 外参平移: [1.72200568478, 0.00475453292289, 1.49491291905]
+LIDAR_TOP 外参平移: [0.985793, 0.0, 1.84019]
+map_pointcloud_to_image(): 投影 2983 个 LiDAR 点
+get_sample_data(): 获得 8 个相机坐标系 3D 框
+project_box(): 生成 8 个 2D 包围框
+已生成: lidar_on_camera.jpg
+已生成: boxes_3d_on_camera.jpg
+已生成: boxes_2d_on_camera.jpg

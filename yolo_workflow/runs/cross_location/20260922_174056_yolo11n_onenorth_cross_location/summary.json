@@ -1,0 +1,38 @@
+{
+  "model": "/home/yin/courses/autonomous_driving/yolo_workflow/runs/checkpoints/20260916_092702_yolo11n_onenorth/weights/best.pt",
+  "split": "test",
+  "results": [
+    {
+      "location": "boston-seaport",
+      "images": 2709,
+      "precision": 0.38852237470781703,
+      "recall": 0.19543570775998553,
+      "mAP50": 0.15566870334043711,
+      "mAP50-95": 0.07116822096757669
+    },
+    {
+      "location": "singapore-hollandvillage",
+      "images": 88,
+      "precision": 0.6654414672868476,
+      "recall": 0.4302152881237065,
+      "mAP50": 0.4447673803294813,
+      "mAP50-95": 0.27546708617131066
+    },
+    {
+      "location": "singapore-onenorth",
+      "images": 1015,
+      "precision": 0.6860921801153932,
+      "recall": 0.5049313569240366,
+      "mAP50": 0.5478718847239517,
+      "mAP50-95": 0.28791626501058126
+    },
+    {
+      "location": "singapore-queenstown",
+      "images": 486,
+      "precision": 0.5438358655616755,
+      "recall": 0.5441131289205997,
+      "mAP50": 0.5384655524890427,
+      "mAP50-95": 0.2586612446528237
+    }
+  ]
+}

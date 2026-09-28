@@ -1,0 +1,19 @@
+数据目录: /mnt/wsl/data/autonomous_driving/datasets/nuscenes
+场景数量: 850
+样本数量: 34149
+标注数量: 1166187
+示例场景: scene-0001
+场景描述: Construction, maneuver between several trucks
+示例 sample token: e93e98b63d3b40209056d129dc53ceee
+当前 sample 目标数量: 10
+传感器数据:
+  CAM_FRONT_LEFT: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_FRONT_LEFT/n015-2018-07-18-11-07-57+0800__CAM_FRONT_LEFT__1531883530404844.jpg (存在=True)
+  CAM_FRONT: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_FRONT/n015-2018-07-18-11-07-57+0800__CAM_FRONT__1531883530412470.jpg (存在=True)
+  CAM_FRONT_RIGHT: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_FRONT_RIGHT/n015-2018-07-18-11-07-57+0800__CAM_FRONT_RIGHT__1531883530420339.jpg (存在=True)
+  CAM_BACK_LEFT: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_BACK_LEFT/n015-2018-07-18-11-07-57+0800__CAM_BACK_LEFT__1531883530447423.jpg (存在=True)
+  CAM_BACK: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_BACK/n015-2018-07-18-11-07-57+0800__CAM_BACK__1531883530437525.jpg (存在=True)
+  CAM_BACK_RIGHT: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/CAM_BACK_RIGHT/n015-2018-07-18-11-07-57+0800__CAM_BACK_RIGHT__1531883530427893.jpg (存在=True)
+  LIDAR_TOP: /mnt/wsl/data/autonomous_driving/datasets/nuscenes/samples/LIDAR_TOP/n015-2018-07-18-11-07-57+0800__LIDAR_TOP__1531883530449377.pcd.bin (存在=True)
+已生成: camera_mosaic.jpg（六路相机）
+已生成: cam_front_boxes.jpg（前视相机与3D标注框）
+已生成: lidar_top.png（LiDAR俯视图）

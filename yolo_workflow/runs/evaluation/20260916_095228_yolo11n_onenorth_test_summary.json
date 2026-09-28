@@ -1,0 +1,27 @@
+{
+  "model": "runs/checkpoints/20260916_092702_yolo11n_onenorth/weights/best.pt",
+  "data": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_yolo_vis34/singapore-onenorth/data.yaml",
+  "splits": [
+    "test"
+  ],
+  "results": {
+    "test": {
+      "data": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_yolo_vis34/singapore-onenorth/data.yaml",
+      "source": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_yolo_vis34/singapore-onenorth/images/test",
+      "metrics": {
+        "metrics/precision(B)": 0.6860921801153932,
+        "metrics/recall(B)": 0.5049313569240366,
+        "metrics/mAP50(B)": 0.5478718847239517,
+        "metrics/mAP50-95(B)": 0.28791626501058126,
+        "fitness": 0.28791626501058126,
+        "map": 0.28791626501058126,
+        "map50": 0.5478718847239517,
+        "map75": 0.2783614753083909,
+        "mp": 0.6860921801153932,
+        "mr": 0.5049313569240366
+      },
+      "val_dir": "runs/evaluation/20260916_095228_yolo11n_onenorth_test_val_test"
+    }
+  },
+  "summary": "runs/evaluation/20260916_095228_yolo11n_onenorth_test_summary.json"
+}
