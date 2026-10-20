@@ -1,0 +1,26 @@
+{
+  "rendered": [
+    {
+      "file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203330_pointpillars_mini_baseline/visualizations/bev_01.png",
+      "source_lidar": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_pointpillars_mini/samples/LIDAR_TOP/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151603547590.pcd.bin",
+      "detections": 162,
+      "sample_index": 0,
+      "score_threshold": 0.1
+    },
+    {
+      "file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203330_pointpillars_mini_baseline/visualizations/bev_02.png",
+      "source_lidar": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_pointpillars_mini/samples/LIDAR_TOP/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151604048025.pcd.bin",
+      "detections": 144,
+      "sample_index": 1,
+      "score_threshold": 0.1
+    },
+    {
+      "file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203330_pointpillars_mini_baseline/visualizations/bev_03.png",
+      "source_lidar": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_pointpillars_mini/samples/LIDAR_TOP/n008-2018-08-01-15-16-36-0400__LIDAR_TOP__1533151604547893.pcd.bin",
+      "detections": 111,
+      "sample_index": 2,
+      "score_threshold": 0.1
+    }
+  ],
+  "score_threshold": 0.1
+}

@@ -1,0 +1,16 @@
+{
+  "validation_status": "PARAMETERS_UPDATED",
+  "trainable_scope": "pts_bbox_head only",
+  "changed_parameter_tensors": 6,
+  "total_trainable_parameter_tensors": 6,
+  "gradient_parameter_tensors": 6,
+  "gradient_events": 7752,
+  "nonfinite_scaled_gradient_events": 1,
+  "max_abs_gradient": 55040.0,
+  "max_abs_parameter_change": 0.07989495992660522,
+  "all_trainable_parameters_finite": true,
+  "wall_seconds": 63.526,
+  "peak_gpu_allocated_bytes": 490568192,
+  "peak_gpu_reserved_bytes": 2407530496,
+  "last_loss": 2.6123383045196533
+}

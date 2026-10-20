@@ -1,0 +1,18 @@
+{
+  "command": "train.py --epochs 1 --work-dir /home/yin/courses/autonomous_driving/pointpillars_workflow/outputs/20261019_203612_pointpillars_mini_run1 --amp",
+  "data_root": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_pointpillars_mini",
+  "input_mode": "single_keyframe_xyz_intensity",
+  "train_samples": 323,
+  "val_samples": 81,
+  "overlap_samples": 0,
+  "max_epochs": 1,
+  "amp": true,
+  "max_voxels_train": 6000,
+  "max_voxels_test": 8000,
+  "bev_range_meters": "x,y in [-25,25]",
+  "mode": "head_only",
+  "load_from": "/home/yin/courses/autonomous_driving/pointpillars_workflow/checkpoints/pointpillars_nuscenes_official.pth",
+  "resume": false,
+  "status": "SUCCESS_PARAMETERS_UPDATED",
+  "audit_file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203612_pointpillars_mini_run1/training_audit.json"
+}

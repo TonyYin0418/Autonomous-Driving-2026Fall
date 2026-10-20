@@ -1,0 +1,22 @@
+{
+  "train": {
+    "samples": 323,
+    "points": 11213728,
+    "min_points": 34368,
+    "max_points": 34816,
+    "all_xyz_intensity_finite": true,
+    "all_sweeps_removed": true,
+    "source_sha256": "9aca9a3f42ffc171568f6e074cfeb731a90330db2082523c25df3954578d2ef6"
+  },
+  "val": {
+    "samples": 81,
+    "points": 2812480,
+    "min_points": 34560,
+    "max_points": 34784,
+    "all_xyz_intensity_finite": true,
+    "all_sweeps_removed": true,
+    "source_sha256": "8c52ab509147802d24b5592ea47d59369f8b12784073616b0e28a0760a2870c7"
+  },
+  "checkpoint_strict_load": "all keys matched in explicit model.load_state_dict(strict=True) check",
+  "model_parameters": 4928678
+}

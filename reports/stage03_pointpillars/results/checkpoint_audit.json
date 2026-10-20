@@ -1,0 +1,26 @@
+{
+  "epoch1": {
+    "epoch": 1,
+    "iteration": 323,
+    "changed_head_tensors": 6,
+    "changed_nonhead_parameter_tensors": 0,
+    "all_model_parameters_finite": true,
+    "optimizer_steps": [
+      321.0
+    ],
+    "amp_loss_scale": 16384.0,
+    "changed_bn_buffers": 63
+  },
+  "epoch5": {
+    "epoch": 5,
+    "iteration": 1615,
+    "changed_head_tensors": 6,
+    "changed_nonhead_parameter_tensors": 0,
+    "all_model_parameters_finite": true,
+    "optimizer_steps": [
+      1612.0
+    ],
+    "amp_loss_scale": 8192.0,
+    "changed_bn_buffers": 63
+  }
+}

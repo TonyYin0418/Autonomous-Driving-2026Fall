@@ -1,0 +1,15 @@
+{
+  "command": "test.py --checkpoint /home/yin/courses/autonomous_driving/pointpillars_workflow/outputs/20261019_203712_pointpillars_mini_run5/epoch_5.pth --output-dir /home/yin/courses/autonomous_driving/pointpillars_workflow/outputs/20261019_203834_pointpillars_mini_finetuned --vis-count 3 --score-thr 0.10",
+  "checkpoint": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203712_pointpillars_mini_run5/epoch_5.pth",
+  "data_root": "/mnt/wsl/data/autonomous_driving/datasets/nuscenes_pointpillars_mini",
+  "input_mode": "single_keyframe_xyz_intensity",
+  "train_samples": 323,
+  "val_samples": 81,
+  "overlap_samples": 0,
+  "status": "SUCCESS",
+  "wall_seconds": 10.521,
+  "peak_gpu_allocated_bytes": 489009152,
+  "metrics_file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203834_pointpillars_mini_finetuned/metrics_summary.json",
+  "prediction_file": "/mnt/wsl/data/autonomous_driving/runs/stage03_pointpillars/20261019_203834_pointpillars_mini_finetuned/predictions.pkl",
+  "visualization_count": 3
+}
