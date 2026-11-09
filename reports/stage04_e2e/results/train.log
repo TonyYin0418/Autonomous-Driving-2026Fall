@@ -1,0 +1,29 @@
+Loading JPEG byte cache from data archive ...
+JPEG cache: 97329 images, 1141 MiB, 19.5 seconds
+{"dataroot": "/home/yin/courses/autonomous_driving/data/udacity_e2e/dataset", "work_dir": "e2e_workflow/outputs/20261109_193500_nvidia_udacity", "epochs": 5, "resume": null, "batch_size": 32, "num_workers": 2, "lr": 0.0001, "weight_decay": 1e-05, "seed": 20261109, "image_archive": "/home/yin/courses/autonomous_driving/data/udacity_assets/dataset.zip", "train_rows": 25954, "val_rows": 6489, "torch": "2.4.0+cu121", "device": "NVIDIA GeForce RTX 4060", "camera_correction": 0.4}
+PARAMETERS 559419
+  training batch 200/812 mse=0.200673
+  training batch 400/812 mse=0.190770
+  training batch 600/812 mse=0.185213
+  training batch 800/812 mse=0.180552
+{"epoch": 1, "lr": 0.0001, "train_mse": 0.18048630702065757, "val_mse": 0.16162540101610642, "val_center_mse": 0.1010177071352809, "val_center_mae": 0.24596797220327396, "seconds": 32.46458494605031, "peak_gpu_mb": 280.67236328125}
+  training batch 200/812 mse=0.162666
+  training batch 400/812 mse=0.160427
+  training batch 600/812 mse=0.156920
+  training batch 800/812 mse=0.155081
+{"epoch": 2, "lr": 0.0001, "train_mse": 0.15516478579726486, "val_mse": 0.14983212075836272, "val_center_mse": 0.09991394143421269, "val_center_mae": 0.24386336745016562, "seconds": 30.537512656999752, "peak_gpu_mb": 134.9462890625}
+  training batch 200/812 mse=0.145537
+  training batch 400/812 mse=0.147211
+  training batch 600/812 mse=0.146420
+  training batch 800/812 mse=0.145879
+{"epoch": 3, "lr": 0.0001, "train_mse": 0.14611385823351503, "val_mse": 0.1447197959855028, "val_center_mse": 0.09524025801683468, "val_center_mae": 0.24081483999079778, "seconds": 29.94927513296716, "peak_gpu_mb": 134.9462890625}
+  training batch 200/812 mse=0.141773
+  training batch 400/812 mse=0.140832
+  training batch 600/812 mse=0.139354
+  training batch 800/812 mse=0.138872
+{"epoch": 4, "lr": 0.0001, "train_mse": 0.13879428944030597, "val_mse": 0.133596118158948, "val_center_mse": 0.09425732986202114, "val_center_mae": 0.23677481707006964, "seconds": 30.854787084972486, "peak_gpu_mb": 134.9462890625}
+  training batch 200/812 mse=0.134646
+  training batch 400/812 mse=0.132833
+  training batch 600/812 mse=0.133245
+  training batch 800/812 mse=0.132178
+{"epoch": 5, "lr": 0.0001, "train_mse": 0.13202988923345993, "val_mse": 0.12762876229813563, "val_center_mse": 0.09112731075595498, "val_center_mae": 0.23307215375660711, "seconds": 30.622296882094815, "peak_gpu_mb": 134.9462890625}

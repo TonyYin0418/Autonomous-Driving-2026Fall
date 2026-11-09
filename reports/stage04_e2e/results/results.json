@@ -1,0 +1,21 @@
+{
+  "epochs": 50,
+  "best_epoch": 38,
+  "best_center_mse": 0.07424443549598415,
+  "best_center_rmse": 0.27247832114864506,
+  "best_center_mae": 0.1999936387468733,
+  "last_train_mse": 0.06059739114512591,
+  "last_val_mse": 0.07819190806769845,
+  "total_training_seconds": 1500.8417915218743,
+  "mean_epoch_seconds": 30.016835830437486,
+  "peak_gpu_mb": 287.34423828125,
+  "rows": 32443,
+  "train_rows": 25954,
+  "val_rows": 6489,
+  "driving": {
+    "frames": 29479,
+    "seconds": 182.795,
+    "mean_speed": 10.364063167000237,
+    "mean_inference_ms": 2.6261458106646627
+  }
+}

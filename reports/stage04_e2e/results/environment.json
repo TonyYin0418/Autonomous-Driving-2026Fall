@@ -1,0 +1,16 @@
+{
+  "python": "3.10.21",
+  "torch": "2.4.0+cu121",
+  "cuda": "12.1",
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "parameters": 559419,
+  "rows": 32443,
+  "images": 97329,
+  "numpy": "1.26.4",
+  "opencv-python-headless": "4.10.0.84",
+  "Flask": "2.0.3",
+  "Flask-SocketIO": "4.3.1",
+  "python-engineio": "3.13.2",
+  "python-socketio": "4.6.0",
+  "eventlet": "0.36.1"
+}

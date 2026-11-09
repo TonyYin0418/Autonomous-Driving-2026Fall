@@ -1,0 +1,17 @@
+{
+  "dataroot": "/home/yin/courses/autonomous_driving/data/udacity_e2e/dataset",
+  "work_dir": "e2e_workflow/outputs/20261109_193500_nvidia_udacity",
+  "epochs": 50,
+  "resume": "e2e_workflow/outputs/20261109_193500_nvidia_udacity/last.h5",
+  "batch_size": 32,
+  "num_workers": 2,
+  "lr": 0.0001,
+  "weight_decay": 1e-05,
+  "seed": 20261109,
+  "image_archive": "/home/yin/courses/autonomous_driving/data/udacity_assets/dataset.zip",
+  "train_rows": 25954,
+  "val_rows": 6489,
+  "torch": "2.4.0+cu121",
+  "device": "NVIDIA GeForce RTX 4060",
+  "camera_correction": 0.4
+}

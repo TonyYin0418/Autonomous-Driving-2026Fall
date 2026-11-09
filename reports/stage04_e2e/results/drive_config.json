@@ -1,0 +1,6 @@
+{
+  "checkpoint": "/mnt/wsl/data/autonomous_driving/runs/stage04_e2e/20261109_193500_nvidia_udacity/best.h5",
+  "epoch": 38,
+  "target_speed": 10,
+  "controller": "1.2-steering^2-(speed/target)^2"
+}

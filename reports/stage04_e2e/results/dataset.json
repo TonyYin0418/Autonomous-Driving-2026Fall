@@ -1,0 +1,19 @@
+{
+  "rows": 32443,
+  "images": 97329,
+  "tracks": {
+    "track1data": 10615,
+    "track2data": 21828
+  },
+  "csv_has_header": false,
+  "zero_steering_rows": 18997,
+  "columns": [
+    "center",
+    "left",
+    "right",
+    "steering",
+    "throttle",
+    "brake",
+    "speed"
+  ]
+}
