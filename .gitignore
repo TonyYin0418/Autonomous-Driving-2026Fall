@@ -1,5 +1,8 @@
 # uv environment and cache
-.venv/
+.venv-stage01
+.venv-stage02
+.venv-stage03
+.venv-stage04
 .uv-cache/
 
 # Python
@@ -14,7 +17,35 @@ data
 **/.mpl-cache/
 **/.ultralytics/
 
+# PETR runtime outputs can contain multi-GB checkpoints. Keep source,
+# configuration and reports under version control instead.
+petr_workflow/outputs/
+e2e_workflow/outputs
+petr_workflow/**/__pycache__/
+
+# PointPillars generated indexes, weights and data-disk output link.
+pointpillars_workflow/outputs
+pointpillars_workflow/checkpoints/*
+!pointpillars_workflow/checkpoints/official_pointpillars_config.py
+pointpillars_workflow/data_infos/*.pkl
+reports/stage03_pointpillars/stage03_pointpillars_results.zip
+
+# Keep Stage01 weights locally; source and small results are versioned.
+yolo_workflow/weights/*.pt
+yolo_workflow/runs/**/weights/*.pt
+
+# Guard against accidentally committing temporary teacher asset imports in docs.
+docs/dataset.zip
+docs/checkpoints.zip
+docs/checkpoints_thirdparty.rar
+docs/nuscenes_infos_train.pkl
+docs/nuscenes_infos_val.pkl
+docs/nuscenes_dbinfos_train.pkl
+
 # Local editor and notebook state
 .vscode/
 .idea/
 .ipynb_checkpoints/
+
+# LaTeX intermediate files (final PDFs may be committed explicitly)
+reports/**/build/*
