@@ -30,8 +30,8 @@ uv pip install --python "$STAGE03_PYTHON" \
 
 # Use the teacher-supplied MMDetection3D source distribution.
 mkdir -p "$STAGE03_ASSETS"
-if [[ -f "$STAGE03_PROJECT_ROOT/docs/checkpoints_thirdparty.rar" ]]; then
-    bsdtar -xOf "$STAGE03_PROJECT_ROOT/docs/checkpoints_thirdparty.rar" \
+if [[ -f "$STAGE03_ASSETS/checkpoints_thirdparty.rar" ]]; then
+    bsdtar -xOf "$STAGE03_ASSETS/checkpoints_thirdparty.rar" \
         third_party/mmdet3d-1.4.0.tar.gz > "$STAGE03_ASSETS/mmdet3d-1.4.0.tar.gz"
 else
     # The source submission ZIP includes this small source archive directly.

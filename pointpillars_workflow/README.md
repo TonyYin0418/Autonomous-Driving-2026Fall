@@ -50,6 +50,7 @@
 | 独立 Python 环境 | `.venv-stage03` → `/home/yin/data/autonomous_driving/envs/stage03/` |
 | 单帧数据与教师源索引 | `data/nuscenes_pointpillars_mini/`（相对仓库根目录） |
 | 官方权重和完整配置 | `data/pointpillars_assets/` |
+| 教师原始权重包与依赖包 | `data/pointpillars_assets/checkpoints.zip`、`checkpoints_thirdparty.rar` |
 | 运行输出 | 本目录 `outputs` → 数据盘 `runs/stage03_pointpillars/` |
 | 正式报告与证据 | `reports/stage03_pointpillars/` |
 | 源码 ZIP 与提交 PDF | `submit/stage03/` |
@@ -68,6 +69,8 @@ mini 元数据、地图和 404 帧点云通过软链接复用已有数据。原�
 模型使用 x/y/z/intensity 四维。全部点云可读且输入有限；8 个训练场景 / 323 帧、
 2 个验证场景 / 81 帧，无 token 交集。预处理移除 3940 条历史 sweeps 引用，
 实际没有读取 sweeps；额外的 `nuscenes_dbinfos_train.pkl` 不参与本实验。
+教师提供的三个原始 PKL 索引统一保存在 `data/nuscenes_pointpillars_mini/`；
+原始二进制资产不在 `docs/` 留副本或软链接。
 
 完整官方权重在两个教师压缩包中相同，其 SHA256 为：
 
