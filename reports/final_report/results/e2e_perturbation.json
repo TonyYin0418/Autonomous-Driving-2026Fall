@@ -1,0 +1,73 @@
+{
+  "checkpoint": "outputs/20261109_193500_nvidia_udacity/best.h5",
+  "epoch": 38,
+  "val_images": 6489,
+  "camera": "center",
+  "pedestrian_source": "n015-2018-09-25-13-17-43+0800__CAM_FRONT__1537852863112460",
+  "results": [
+    {
+      "condition": "original",
+      "mse": 0.0742444396018982,
+      "mae": 0.19999366998672485,
+      "mean_abs_change": 0.0,
+      "p95_abs_change": 0.0,
+      "frac_change_gt_0.1": 0.0
+    },
+    {
+      "condition": "dark_0.5",
+      "mse": 0.13057413697242737,
+      "mae": 0.26403892040252686,
+      "mean_abs_change": 0.19575409591197968,
+      "p95_abs_change": 0.5672474026679981,
+      "frac_change_gt_0.1": 0.6289104638619202
+    },
+    {
+      "condition": "dark_0.25",
+      "mse": 0.13706813752651215,
+      "mae": 0.2451995462179184,
+      "mean_abs_change": 0.21361981332302094,
+      "p95_abs_change": 0.5926808118820189,
+      "frac_change_gt_0.1": 0.6623516720604099
+    },
+    {
+      "condition": "blur",
+      "mse": 0.07745153456926346,
+      "mae": 0.2068949043750763,
+      "mean_abs_change": 0.06716332584619522,
+      "p95_abs_change": 0.19413522481918327,
+      "frac_change_gt_0.1": 0.22068115271998767
+    },
+    {
+      "condition": "rain",
+      "mse": 0.08886171132326126,
+      "mae": 0.2197166085243225,
+      "mean_abs_change": 0.09412361681461334,
+      "p95_abs_change": 0.2816830873489379,
+      "frac_change_gt_0.1": 0.35521652026506395
+    },
+    {
+      "condition": "shadow",
+      "mse": 0.16484445333480835,
+      "mae": 0.305167555809021,
+      "mean_abs_change": 0.23984721302986145,
+      "p95_abs_change": 0.677189016342163,
+      "frac_change_gt_0.1": 0.701340730466944
+    },
+    {
+      "condition": "occlusion",
+      "mse": 0.12481261789798737,
+      "mae": 0.26387953758239746,
+      "mean_abs_change": 0.17031927406787872,
+      "p95_abs_change": 0.5022847294807432,
+      "frac_change_gt_0.1": 0.5757435660348281
+    },
+    {
+      "condition": "pedestrian",
+      "mse": 0.0850064605474472,
+      "mae": 0.21877391636371613,
+      "mean_abs_change": 0.08477495610713959,
+      "p95_abs_change": 0.24745787382125825,
+      "frac_change_gt_0.1": 0.30867622129758054
+    }
+  ]
+}

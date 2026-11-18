@@ -1,7 +1,7 @@
 # 自动驾驶技术课程实践
 
-Stage01、Stage02、Stage03、Stage04 均已完成。提交附件统一放在项目根目录的
-[`submit/`](submit/)，每个阶段各有一份源码 ZIP 和一份报告 PDF。
+Stage01、Stage02、Stage03、Stage04 均已完成，结题报告也已完成。提交附件统一放在项目根目录的
+[`submit/`](submit/)，每个阶段各有一份源码 ZIP 和一份报告 PDF，结题报告只有 PDF。
 
 ## 阶段与结果
 
@@ -11,6 +11,7 @@ Stage01、Stage02、Stage03、Stage04 均已完成。提交附件统一放在项
 | Stage02 | PETR 六相机三维检测，20 轮训练及续训到 40 轮 | [PETR](petr_workflow/README.md) | [报告](reports/stage02_petr/stage02_petr_report.pdf) | [stage02](submit/stage02/) |
 | Stage03 | PointPillars 单帧 LiDAR，1 轮微调及恢复到累计 5 轮 | [PointPillars](pointpillars_workflow/README.md) | [报告](reports/stage03_pointpillars/stage03_pointpillars_report.pdf) | [stage03](submit/stage03/) |
 | Stage04 | NVIDIA CNN 转角预测，50 轮训练与 Udacity 模拟器 | [端到端模型](e2e_workflow/README.md) | [报告](reports/stage04_e2e/stage04_e2e_report.pdf) | [stage04](submit/stage04/) |
+| 结题报告 | 三道结题题目，含夜间与雨天检测、端到端扰动和遮挡敏感度三组补充测试 | [补充测试脚本](reports/final_report/scripts/) | [报告](reports/final_report/final_report.pdf) | [final](submit/final/) |
 
 - Stage01：One-North 独立 test 集 mAP50 为 0.548、mAP50–95 为 0.288。
   跨地区 mAP50–95：Boston 0.071、Holland Village 0.275、One-North 0.288、Queenstown 0.259。
@@ -20,6 +21,8 @@ Stage01、Stage02、Stage03、Stage04 均已完成。提交附件统一放在项
   微调后 mAP 0.06138、NDS 0.11815。此为单帧、50×50 m 的教学设置，仍有误检与漏检。
 - Stage04：50 轮训练和验证合计 25.01 分钟，末轮验证 MSE 0.078192。
   第 38 轮权重在 Lake Track 自动行驶 182.8 秒，平均速度 10.36 mph。
+- 结题报告补充测试：One-North 模型在新加坡其他地区白天 mAP50–95 为 0.257、夜间为 0.010，
+  波士顿非雨天 0.079、雨天 0.055。端到端模型加入路面阴影后，转角预测平均变化 0.240。
 
 ## 目录
 
@@ -39,7 +42,8 @@ Stage01、Stage02、Stage03、Stage04 均已完成。提交附件统一放在项
 │   ├── stage01/
 │   ├── stage02/
 │   ├── stage03/
-│   └── stage04/
+│   ├── stage04/
+│   └── final/
 ├── data -> 数据盘/datasets     # 本地链接，不入 Git
 ├── .venv-stage01 -> 独立环境    # 本地链接，不入 Git
 ├── .venv-stage02 -> 独立环境

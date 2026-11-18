@@ -52,3 +52,6 @@
   Python 3.10.21、Torch 2.4.0+cu121，默认下载代理为 `http://127.0.0.1:17890`。
   模拟器使用第 38 轮 best.h5，在 Lake Track 自动行驶 182.8 秒。
   Windows 端通过 start_simulator.cmd 设置 OPENSSL_ia32cap，解决旧程序在本机的启动崩溃。
+- 结题报告已完成，正文在 `reports/final_report/main.typ`，附件在 `submit/final/`。三组补充测试
+  只做推理，结果保存在 `reports/final_report/results/`，中间版本在 `history/`。写作上少用分号和
+  排比句，课外调研要写明“我查阅了……”，额外做的测试要明确说明是补充测试。
