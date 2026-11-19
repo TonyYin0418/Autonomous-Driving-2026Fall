@@ -54,6 +54,9 @@
 #show figure.caption: set text(size: 9pt)
 #show figure.caption: set par(first-line-indent: 0pt, justify: false)
 #show figure.where(kind: table): set figure.caption(position: top)
+// 文中引用跳转到参考文献条目
+#let rl(n) = link(label("ref-" + str(n)), str(n))
+#let refitem(n, body) = block(below: 0.5em, grid(columns: (2.4em, 1fr), [\[#n\]], body))
 #let plot(file, caption, width: 100%) = figure(image("figures/" + file, width: width), caption: caption)
 #let sub(file, label) = {
   set par(first-line-indent: 0pt)
@@ -236,7 +239,7 @@
 
 == nuScenes 数据集的组成与作用
 
-nuScenes 由 nuTonomy 发布，是第一个集成摄像头、激光雷达和毫米波雷达全套传感器的大规模自动驾驶数据集 [1]，共包含 1000 个约 20 秒的驾驶场景，采集于美国波士顿和新加坡的城市道路，覆盖白天、夜间和雨天。
+nuScenes 由 nuTonomy 发布，是第一个集成摄像头、激光雷达和毫米波雷达全套传感器的大规模自动驾驶数据集 \[#rl(1)\]，共包含 1000 个约 20 秒的驾驶场景，采集于美国波士顿和新加坡的城市道路，覆盖白天、夜间和雨天。
 
 采集车装有 6 个摄像头（约 12 Hz，分辨率 $1600 times 900$）、1 个 32 线激光雷达（约 20 Hz）和 5 个毫米波雷达（约 13 Hz），另有 GPS 和 IMU 记录车辆位姿。关键帧以 2 Hz 的频率标注，共约 140 万个三维框，涉及 23 个目标类别，三维检测任务使用其中合并后的 10 个类别。
 
@@ -328,14 +331,14 @@ nuScenes 由 nuTonomy 发布，是第一个集成摄像头、激光雷达和毫�
 
 === YOLO
 
-YOLO 是单阶段的二维检测器 [5]。整张图像输入卷积网络后，网络提取出几种不同分辨率的特征图：分辨率高的特征图负责小目标，分辨率低的负责大目标。特征图上的每个位置都会同时预测三件事：这里是否有目标、目标属于哪一类、目标框的位置和大小。YOLO11 不再预设锚框，直接预测该位置到目标框四条边的距离。最后用非极大值抑制去掉重叠的框，得到检测结果。
+YOLO 是单阶段的二维检测器 \[#rl(5)\]。整张图像输入卷积网络后，网络提取出几种不同分辨率的特征图：分辨率高的特征图负责小目标，分辨率低的负责大目标。特征图上的每个位置都会同时预测三件事：这里是否有目标、目标属于哪一类、目标框的位置和大小。YOLO11 不再预设锚框，直接预测该位置到目标框四条边的距离。最后用非极大值抑制去掉重叠的框，得到检测结果。
 
 - *优势*：只需一次前向计算就能得到全部目标，速度快，适合实时运行和车端部署。
 - *不足*：只输出二维框，远处的小目标占的像素少，容易漏检。第一次实践中远处行人和自行车漏检较多，正是这个原因。
 
 === PointPillars
 
-PointPillars 以激光雷达点云为输入 [2]，核心思路是把三维点云变成一张“图像”，再借用成熟的二维检测网络。具体分三步：
+PointPillars 以激光雷达点云为输入 \[#rl(2)\]，核心思路是把三维点云变成一张“图像”，再借用成熟的二维检测网络。具体分三步：
 
 + 在俯视平面上把空间划分为网格，同一网格内、从地面到高处的所有点组成一个竖直的柱体（pillar）。
 + 用一个小型点特征网络处理每个柱体里的点，把它们汇总成一个固定长度的特征向量。
@@ -346,7 +349,7 @@ PointPillars 以激光雷达点云为输入 [2]，核心思路是把三维点云
 
 === BEVFormer
 
-BEVFormer 以多相机图像为输入 [4]，先构建一张车辆周围的鸟瞰图（BEV）特征，再在鸟瞰图上检测目标。
+BEVFormer 以多相机图像为输入 \[#rl(4)\]，先构建一张车辆周围的鸟瞰图（BEV）特征，再在鸟瞰图上检测目标。
 
 鸟瞰图被划分为网格，每个网格对应一个查询。对每个查询，网络在该位置取几个不同的高度，把这些三维点投影到相机图像上，只到投影落在的那几个视图中采样特征，这一步称为空间交叉注意力。随后，时序自注意力把上一时刻的鸟瞰图特征按自车运动对齐后融合进来。得到鸟瞰图特征后，检测头输出三维框。
 
@@ -355,7 +358,7 @@ BEVFormer 以多相机图像为输入 [4]，先构建一张车辆周围的鸟瞰
 
 === PETR
 
-PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是让图像特征直接带上三维位置信息。
+PETR 同样以多相机图像为输入 \[#rl(3)\]，但不构建鸟瞰图，做法是让图像特征直接带上三维位置信息。
 
 核心是三维位置编码。对图像特征图上的每个像素，沿相机视线在一组深度上取点，再用相机内外参把这些点转换到统一的车体坐标系，编码后加到图像特征上。这样，每个像素的特征都“知道”自己可能对应空间中的哪些位置。之后，一组目标查询（课程配置中为 100 个）通过 Transformer 解码器与六路相机的特征交互，每个查询直接输出一个三维框，不需要非极大值抑制。
 
@@ -413,9 +416,9 @@ PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是�
   tbl(columns: (30mm, 30mm, 28mm, 1fr, 1fr),
     [方法], [传感器], [骨干网络], [mAP], [NDS],
     table.hline(stroke: 0.5pt),
-    [PointPillars [1]], [激光雷达], [—], [30.5%], [45.3%],
-    [PETR [3]], [六路相机], [VoVNet-99], [44.1%], [50.4%],
-    [BEVFormer [4]], [六路相机（多帧）], [VoVNet-99], [48.1%], [56.9%],
+    [PointPillars \[#rl(1)\]], [激光雷达], [—], [30.5%], [45.3%],
+    [PETR \[#rl(3)\]], [六路相机], [VoVNet-99], [44.1%], [50.4%],
+    [BEVFormer \[#rl(4)\]], [六路相机（多帧）], [VoVNet-99], [48.1%], [56.9%],
   ), caption: [原论文在完整 nuScenes 测试集上的结果],
 ) <tab-paper>
 
@@ -455,9 +458,9 @@ PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是�
 
 *为了确认这些问题是否普遍，我查阅了两篇专门研究感知鲁棒性的论文。*
 
-第一篇是 Dong 等人发表在 CVPR 2023 的 _Benchmarking Robustness of 3D Object Detection to Common Corruptions_ [11]。作者针对激光雷达和相机输入设计了 27 种常见的数据损坏，分为天气、传感器、运动、目标和传感器对齐五大类，例如雨雪雾、点云缺失、运动模糊和传感器之间的时间不同步。作者把这些损坏合成到 KITTI、nuScenes 和 Waymo 上，建立了 KITTI-C、nuScenes-C、Waymo-C 三个基准，测试了 24 个三维检测模型。论文的主要结论有三条。运动类损坏对所有模型的影响最大，激光雷达模型和融合模型在部分运动类损坏下的性能下降超过 50%。激光雷达与相机融合的模型整体更稳健。纯视觉模型对图像损坏极其敏感，作者据此认为激光雷达点云不可或缺。
+第一篇是 Dong 等人发表在 CVPR 2023 的 _Benchmarking Robustness of 3D Object Detection to Common Corruptions_ \[#rl(11)\]。作者针对激光雷达和相机输入设计了 27 种常见的数据损坏，分为天气、传感器、运动、目标和传感器对齐五大类，例如雨雪雾、点云缺失、运动模糊和传感器之间的时间不同步。作者把这些损坏合成到 KITTI、nuScenes 和 Waymo 上，建立了 KITTI-C、nuScenes-C、Waymo-C 三个基准，测试了 24 个三维检测模型。论文的主要结论有三条。运动类损坏对所有模型的影响最大，激光雷达模型和融合模型在部分运动类损坏下的性能下降超过 50%。激光雷达与相机融合的模型整体更稳健。纯视觉模型对图像损坏极其敏感，作者据此认为激光雷达点云不可或缺。
 
-第二篇是 Xie 等人的 _RoboBEV: Towards Robust Bird's Eye View Perception under Corruptions_ [12]，专门研究纯视觉 BEV 模型。作者在 nuScenes 上模拟了三类共 8 种损坏，包括变亮、变暗、雾、雪四种恶劣环境，运动模糊和颜色量化两种图像失真，以及某路相机失效、某些帧丢失两种相机故障，每种损坏分为三个强度。评价指标之一是 mRR，即损坏条件下的 NDS 占原始 NDS 的比例。@tab-robobev 摘录了论文中与本课程相关的两个模型。
+第二篇是 Xie 等人的 _RoboBEV: Towards Robust Bird's Eye View Perception under Corruptions_ \[#rl(12)\]，专门研究纯视觉 BEV 模型。作者在 nuScenes 上模拟了三类共 8 种损坏，包括变亮、变暗、雾、雪四种恶劣环境，运动模糊和颜色量化两种图像失真，以及某路相机失效、某些帧丢失两种相机故障，每种损坏分为三个强度。评价指标之一是 mRR，即损坏条件下的 NDS 占原始 NDS 的比例。@tab-robobev 摘录了论文中与本课程相关的两个模型。
 
 #figure(
   tbl(columns: (26mm, 16mm, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
@@ -465,7 +468,7 @@ PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是�
     table.hline(stroke: 0.5pt),
     [BEVFormer-Base], [0.517], [48.6%], [35.9%], [52.1%], [61.0%], [78.6%], [80.9%],
     [PETR-R50], [0.367], [42.9%], [38.7%], [62.7%], [63.3%], [78.5%], [77.5%],
-  ), caption: [RoboBEV 中两个模型在各类损坏下保留的性能（mRR）[12]],
+  ), caption: [RoboBEV 中两个模型在各类损坏下保留的性能（mRR）\[#rl(12)\]],
 ) <tab-robobev>
 
 可以看到，变暗和下雪对这两个纯视觉模型的影响最大，PETR 在变暗条件下只保留了约四成的性能。论文还发现，原始精度相近的模型在损坏下表现差别很大，预训练和不依赖显式深度估计的鸟瞰图转换方式能提升鲁棒性，融合更长的历史帧则有助于应对相机失效和丢帧。
@@ -476,11 +479,11 @@ PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是�
 
 结合实践和调研，我认为最值得做的有三点。
 
-*第一，多传感器融合。*补充测试中，摄像头模型在夜间几乎失效，而激光雷达和毫米波雷达主动发射信号，不受光照影响，上面的研究也说明融合模型更稳健 [11]。BEVFusion 等方法把相机和激光雷达的特征都转换到鸟瞰图上再融合 [10]，比只在最后合并检测框保留了更多信息。对成本敏感的车型，即使只有摄像头和毫米波雷达，雷达也能在夜间提供前方目标的距离和速度。
+*第一，多传感器融合。*补充测试中，摄像头模型在夜间几乎失效，而激光雷达和毫米波雷达主动发射信号，不受光照影响，上面的研究也说明融合模型更稳健 \[#rl(11)\]。BEVFusion 等方法把相机和激光雷达的特征都转换到鸟瞰图上再融合 \[#rl(10)\]，比只在最后合并检测框保留了更多信息。对成本敏感的车型，即使只有摄像头和毫米波雷达，雷达也能在夜间提供前方目标的距离和速度。
 
 *第二，针对困难场景补充数据。*我的模型在夜间失效，最直接的原因是训练数据里没有夜间图像。nuScenes 本身就有 99 个夜间场景，把其中一部分加入训练或用来微调，再配合降低亮度、模拟雨滴等数据增强，就能有针对性地补上这块短板。实际系统中，这一步通常由数据闭环完成，车队自动收集模型表现不好的片段，标注后用于下一轮训练。
 
-*第三，利用时序信息。*第二、三次实践都只用了当前帧，被遮挡的目标在这一帧里就无从检测。BEVFormer 融合历史鸟瞰图特征后，速度估计和低可见度目标的召回率都有提升 [4]，RoboBEV 也发现更长的时序信息有助于提升鲁棒性 [12]。
+*第三，利用时序信息。*第二、三次实践都只用了当前帧，被遮挡的目标在这一帧里就无从检测。BEVFormer 融合历史鸟瞰图特征后，速度估计和低可见度目标的召回率都有提升 \[#rl(4)\]，RoboBEV 也发现更长的时序信息有助于提升鲁棒性 \[#rl(12)\]。
 
 = 规划决策与端到端自动驾驶综合分析
 
@@ -516,7 +519,7 @@ PETR 同样以多相机图像为输入 [3]，但不构建鸟瞰图，做法是�
 
 *端到端自动驾驶*用一个整体训练的神经网络，从传感器输入直接得到驾驶输出。输出可以是方向盘转角和油门，也可以是一段规划轨迹。网络中间没有人为规定的接口，驾驶表现通过模仿人类驾驶数据或在仿真中试错来整体优化。
 
-NVIDIA 在 2016 年发表的工作是早期的代表 [6]，第四次实践复现的就是这一网络，输入一张道路图像，输出一个方向盘转角。@fig-e2e 把这一网络和模块化系统、一般的端到端系统放在一起对比。
+NVIDIA 在 2016 年发表的工作是早期的代表 \[#rl(6)\]，第四次实践复现的就是这一网络，输入一张道路图像，输出一个方向盘转角。@fig-e2e 把这一网络和模块化系统、一般的端到端系统放在一起对比。
 
 #figure(
   diagram(
@@ -557,7 +560,7 @@ NVIDIA 在 2016 年发表的工作是早期的代表 [6]，第四次实践复现
 
 近几年的端到端系统大多输出未来几秒的轨迹，按生成轨迹的方式大致可以分为三类：
 
-- *基于查询*：网络中设置一组查询向量，分别提取周围车辆、地图等信息，最后汇总输出轨迹，代表工作是 UniAD [8] 和 VAD。
+- *基于查询*：网络中设置一组查询向量，分别提取周围车辆、地图等信息，最后汇总输出轨迹，代表工作是 UniAD \[#rl(8)\] 和 VAD。
 - *基于自回归*：像语言模型逐字生成句子一样，逐个时间点生成轨迹，常与视觉语言模型结合。
 - *基于扩散模型*：从一条随机的“噪声轨迹”出发，逐步修正成合理的轨迹，可以给出多种可能的结果。
 
@@ -592,13 +595,13 @@ NVIDIA 在 2016 年发表的工作是早期的代表 [6]，第四次实践复现
 
 *第一，模仿学习会遇到分布偏移。*网络学的是人类在正常行驶时的操作，训练数据里的车大多位于车道中央。一旦模型自己开车，转角的一点误差就会让车偏离中心，看到训练时没见过的画面，误差可能越积越大。
 
-第四次实践给左右相机图像分别加上 +0.4 和 −0.4 的转角修正，相当于告诉模型“车偏到这里时应该往回打方向”。我查阅资料时发现，这与模仿学习中 DAgger 方法“为模型自己会遇到的状态补充正确标签”的思路一致 [7]。
+第四次实践给左右相机图像分别加上 +0.4 和 −0.4 的转角修正，相当于告诉模型“车偏到这里时应该往回打方向”。我查阅资料时发现，这与模仿学习中 DAgger 方法“为模型自己会遇到的状态补充正确标签”的思路一致 \[#rl(7)\]。
 
 训练数据的分布还会带来“惯性问题”。数据中直行和匀速的样本很多，模型容易倾向于保持当前状态。第四次实践的转角标签同样集中在零附近，补充测试中选取的两个急转弯帧，标签为 ±1.0，模型的预测只有 −0.48 和 +0.14，明显偏向直行。
 
 *第二，开环指标不能代表闭环表现。*开环评测只看录好的数据，比较模型预测和人类操作差多少，并不真正控制车辆。闭环评测则让模型在仿真环境中真正开车，环境会随车辆动作变化。
 
-第四次实践训练到第 38 轮时，验证 MSE 已基本不再下降（@fig-loss），这只说明模型在固定图像上预测得有多准。真正的检验是模拟器中的闭环运行，加载第 38 轮权重后，车辆在 Lake Track 连续行驶了 182.8 秒。我在查阅资料时还看到一项研究 [9]，在 nuScenes 上仅利用自车速度等状态信息，就能取得接近的开环规划分数，这也是 NAVSIM、CARLA 等闭环评测越来越受重视的原因。
+第四次实践训练到第 38 轮时，验证 MSE 已基本不再下降（@fig-loss），这只说明模型在固定图像上预测得有多准。真正的检验是模拟器中的闭环运行，加载第 38 轮权重后，车辆在 Lake Track 连续行驶了 182.8 秒。我在查阅资料时还看到一项研究 \[#rl(9)\]，在 nuScenes 上仅利用自车速度等状态信息，就能取得接近的开环规划分数，这也是 NAVSIM、CARLA 等闭环评测越来越受重视的原因。
 
 #plot("loss_curves.svg", [第四次实践的训练与验证 MSE], width: 72%) <fig-loss>
 
@@ -628,14 +631,14 @@ NVIDIA 在 2016 年发表的工作是早期的代表 [6]，第四次实践复现
 
 *为了了解实际系统怎么做，我查阅了几家公司的公开资料和相关论文*，发现它们的路线并不相同。
 
-#plot("uniad_pipeline.png", [UniAD 的整体结构 [8]]) <fig-uniad>
+#plot("uniad_pipeline.png", [UniAD 的整体结构 \[#rl(8)\]]) <fig-uniad>
 
 
-UniAD 是学术界最有代表性的工作 [8]，获得了 CVPR 2023 最佳论文奖。UniAD 以多相机图像为输入，先得到鸟瞰图特征，再依次接上跟踪（TrackFormer）、在线建图（MapFormer）、运动预测（MotionFormer）、占用预测（OccFormer）和规划（Planner）五个模块，结构见 @fig-uniad。图中的 Track Q、Map Q 等是各模块的查询，B 表示鸟瞰图特征，模块之间通过查询传递信息。这些模块之间传递的是查询向量，没有检测框这样的人工中间结果，整个网络以规划为最终目标联合训练。UniAD 的思路介于模块化和端到端之间，保留了可以检查的中间结果，又能整体优化。
+UniAD 是学术界最有代表性的工作 \[#rl(8)\]，获得了 CVPR 2023 最佳论文奖。UniAD 以多相机图像为输入，先得到鸟瞰图特征，再依次接上跟踪（TrackFormer）、在线建图（MapFormer）、运动预测（MotionFormer）、占用预测（OccFormer）和规划（Planner）五个模块，结构见 @fig-uniad。图中的 Track Q、Map Q 等是各模块的查询，B 表示鸟瞰图特征，模块之间通过查询传递信息。这些模块之间传递的是查询向量，没有检测框这样的人工中间结果，整个网络以规划为最终目标联合训练。UniAD 的思路介于模块化和端到端之间，保留了可以检查的中间结果，又能整体优化。
 
-特斯拉走的是更彻底的端到端路线。从 FSD V12 开始，城市道路驾驶改由一个端到端神经网络完成，取代了原先 30 多万行手写的 C++ 规则代码，网络从数百万段驾驶视频中学习，直接输出转向和加减速等控制 [15]。不过这套系统目前仍属于需要驾驶员监督的辅助驾驶。
+特斯拉走的是更彻底的端到端路线。从 FSD V12 开始，城市道路驾驶改由一个端到端神经网络完成，取代了原先 30 多万行手写的 C++ 规则代码，网络从数百万段驾驶视频中学习，直接输出转向和加减速等控制 \[#rl(15)\]。不过这套系统目前仍属于需要驾驶员监督的辅助驾驶。
 
-理想汽车采用“端到端模型 + 视觉语言模型”的双系统方案，于 2024 年 10 月全量推送 [16, 17]。端到端模型相当于快速反应的“系统 1”，负责大部分常规驾驶。视觉语言模型相当于慢思考的“系统 2”，参数量约 22 亿，用来理解 ETC 车道、公交车道、潮汐车道等需要结合语义的复杂场景，再把判断交给端到端模型。
+理想汽车采用“端到端模型 + 视觉语言模型”的双系统方案，于 2024 年 10 月全量推送 \[#rl(16), #rl(17)\]。端到端模型相当于快速反应的“系统 1”，负责大部分常规驾驶。视觉语言模型相当于慢思考的“系统 2”，参数量约 22 亿，用来理解 ETC 车道、公交车道、潮汐车道等需要结合语义的复杂场景，再把判断交给端到端模型。
 
 从这三个例子可以看出，实际系统多在模块化和端到端之间寻找平衡，越接近量产，越需要可解释的中间结果和安全兜底。
 
@@ -704,13 +707,13 @@ UniAD 是学术界最有代表性的工作 [8]，获得了 CVPR 2023 最佳论�
 
 *下面是我了解的行业发展现状。*
 
-*运营规模。*据新华网报道，截至 2025 年 11 月，萝卜快跑每周的全无人驾驶订单已超过 25 万单，累计服务超过 1700 万次 [13]。限定区域内的 L4 已经从示范走向规模化运营，开始需要考虑单车成本和盈利。
+*运营规模。*据新华网报道，截至 2025 年 11 月，萝卜快跑每周的全无人驾驶订单已超过 25 万单，累计服务超过 1700 万次 \[#rl(13)\]。限定区域内的 L4 已经从示范走向规模化运营，开始需要考虑单车成本和盈利。
 
-*安全表现。*Waymo 在 2025 年发表的研究中，把 5670 万英里的全无人驾驶里程与同区域人类驾驶员的基准对比 [18]。无论责任在哪一方，涉及行人受伤的碰撞减少了 92%，疑似重伤及以上的碰撞减少了 85%。这说明在限定区域、充分验证的条件下，L4 系统已经可以比人类驾驶员更安全。
+*安全表现。*Waymo 在 2025 年发表的研究中，把 5670 万英里的全无人驾驶里程与同区域人类驾驶员的基准对比 \[#rl(18)\]。无论责任在哪一方，涉及行人受伤的碰撞减少了 92%，疑似重伤及以上的碰撞减少了 85%。这说明在限定区域、充分验证的条件下，L4 系统已经可以比人类驾驶员更安全。
 
-*法规。*北京市自动驾驶汽车条例于 2025 年 4 月 1 日起施行 [19]，支持 L3 及以上自动驾驶汽车用于个人乘用车、出租车、公交等出行服务，同时要求试点企业配备安全员和平台安全监控人员，并对数据安全和事故处置作出规定。法规开始为 L3 及以上车辆上路提供依据，但责任认定仍是讨论的焦点。
+*法规。*北京市自动驾驶汽车条例于 2025 年 4 月 1 日起施行 \[#rl(19)\]，支持 L3 及以上自动驾驶汽车用于个人乘用车、出租车、公交等出行服务，同时要求试点企业配备安全员和平台安全监控人员，并对数据安全和事故处置作出规定。法规开始为 L3 及以上车辆上路提供依据，但责任认定仍是讨论的焦点。
 
-*验证方法。*RAND 的研究估算，要以 80% 的置信度证明自动驾驶的致死率比人类低 20%，需要约 110 亿英里的测试，即使 100 辆车不间断行驶也要 500 多年 [14]。Waymo 的 5670 万英里在其中只占很小一部分，所以仅靠道路里程无法证明安全，仿真测试和针对性的场景测试必不可少。这也是世界模型受到关注的原因之一，世界模型可以生成真实世界中很难采集的危险场景。
+*验证方法。*RAND 的研究估算，要以 80% 的置信度证明自动驾驶的致死率比人类低 20%，需要约 110 亿英里的测试，即使 100 辆车不间断行驶也要 500 多年 \[#rl(14)\]。Waymo 的 5670 万英里在其中只占很小一部分，所以仅靠道路里程无法证明安全，仿真测试和针对性的场景测试必不可少。这也是世界模型受到关注的原因之一，世界模型可以生成真实世界中很难采集的危险场景。
 
 === 我的看法
 
@@ -732,43 +735,43 @@ UniAD 是学术界最有代表性的工作 [8]，获得了 CVPR 2023 最佳论�
 
 #heading(numbering: none)[参考文献]
 
-#set par(first-line-indent: 0pt, hanging-indent: 2em)
+#set par(first-line-indent: 0pt, justify: false)
 #set text(size: 9.5pt)
 
-[1] H. Caesar et al. nuScenes: A Multimodal Dataset for Autonomous Driving. CVPR, 2020.
+#refitem(1)[H. Caesar et al. nuScenes: A Multimodal Dataset for Autonomous Driving. CVPR, 2020.] <ref-1>
 
-[2] A. H. Lang et al. PointPillars: Fast Encoders for Object Detection from Point Clouds. CVPR, 2019.
+#refitem(2)[A. H. Lang et al. PointPillars: Fast Encoders for Object Detection from Point Clouds. CVPR, 2019.] <ref-2>
 
-[3] Y. Liu et al. PETR: Position Embedding Transformation for Multi-View 3D Object Detection. ECCV, 2022.
+#refitem(3)[Y. Liu et al. PETR: Position Embedding Transformation for Multi-View 3D Object Detection. ECCV, 2022.] <ref-3>
 
-[4] Z. Li et al. BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers. ECCV, 2022.
+#refitem(4)[Z. Li et al. BEVFormer: Learning Bird's-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers. ECCV, 2022.] <ref-4>
 
-[5] Ultralytics. Ultralytics YOLO Documentation. https://docs.ultralytics.com/.
+#refitem(5)[Ultralytics. Ultralytics YOLO Documentation. https://docs.ultralytics.com/.] <ref-5>
 
-[6] M. Bojarski et al. End to End Learning for Self-Driving Cars. arXiv:1604.07316, 2016.
+#refitem(6)[M. Bojarski et al. End to End Learning for Self-Driving Cars. arXiv:1604.07316, 2016.] <ref-6>
 
-[7] S. Ross, G. Gordon, D. Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. AISTATS, 2011.
+#refitem(7)[S. Ross, G. Gordon, D. Bagnell. A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning. AISTATS, 2011.] <ref-7>
 
-[8] Y. Hu et al. Planning-Oriented Autonomous Driving. CVPR, 2023.
+#refitem(8)[Y. Hu et al. Planning-Oriented Autonomous Driving. CVPR, 2023.] <ref-8>
 
-[9] Z. Li et al. Is Ego Status All You Need for Open-Loop End-to-End Autonomous Driving? CVPR, 2024.
+#refitem(9)[Z. Li et al. Is Ego Status All You Need for Open-Loop End-to-End Autonomous Driving? CVPR, 2024.] <ref-9>
 
-[10] Z. Liu et al. BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird's-Eye View Representation. ICRA, 2023.
+#refitem(10)[Z. Liu et al. BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird's-Eye View Representation. ICRA, 2023.] <ref-10>
 
-[11] Y. Dong et al. Benchmarking Robustness of 3D Object Detection to Common Corruptions. CVPR, 2023.
+#refitem(11)[Y. Dong et al. Benchmarking Robustness of 3D Object Detection to Common Corruptions. CVPR, 2023.] <ref-11>
 
-[12] S. Xie et al. RoboBEV: Towards Robust Bird's Eye View Perception under Corruptions. arXiv:2304.06719, 2023.
+#refitem(12)[S. Xie et al. RoboBEV: Towards Robust Bird's Eye View Perception under Corruptions. arXiv:2304.06719, 2023.] <ref-12>
 
-[13] 新华网. 萝卜快跑周全无人订单超 25 万，累计服务超 1700 万次. 2025-11-14.
+#refitem(13)[新华网. 萝卜快跑周全无人订单超 25 万，累计服务超 1700 万次. 2025-11-14.] <ref-13>
 
-[14] N. Kalra, S. M. Paddock. Driving to Safety: How Many Miles of Driving Would It Take to Demonstrate Autonomous Vehicle Reliability? RAND Corporation, 2016.
+#refitem(14)[N. Kalra, S. M. Paddock. Driving to Safety: How Many Miles of Driving Would It Take to Demonstrate Autonomous Vehicle Reliability? RAND Corporation, 2016.] <ref-14>
 
-[15] Tesla. FSD (Supervised) v12 Release Notes. 2024.
+#refitem(15)[Tesla. FSD (Supervised) v12 Release Notes. 2024.] <ref-15>
 
-[16] 理想汽车. 理想汽车 2024 年 10 月交付数据公告. 2024-11-01.
+#refitem(16)[理想汽车. 理想汽车 2024 年 10 月交付数据公告. 2024-11-01.] <ref-16>
 
-[17] 虎嗅. 理想加入“端到端”竞赛. 2024.
+#refitem(17)[虎嗅. 理想加入“端到端”竞赛. 2024.] <ref-17>
 
-[18] Waymo. New Study: Waymo is Reducing Serious Crashes and Making Streets Safer for Those Most at Risk. 2025.
+#refitem(18)[Waymo. New Study: Waymo is Reducing Serious Crashes and Making Streets Safer for Those Most at Risk. 2025.] <ref-18>
 
-[19] 北京市人民代表大会常务委员会. 北京市自动驾驶汽车条例. 2024-12-31 通过，2025-04-01 施行.
+#refitem(19)[北京市人民代表大会常务委员会. 北京市自动驾驶汽车条例. 2024-12-31 通过，2025-04-01 施行.] <ref-19>
