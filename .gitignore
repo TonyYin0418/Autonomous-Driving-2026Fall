@@ -49,3 +49,6 @@ docs/nuscenes_dbinfos_train.pkl
 
 # LaTeX intermediate files (final PDFs may be committed explicitly)
 reports/**/build/*
+
+# Editor preview of the final report (official PDF is final_report.pdf)
+reports/final_report/main.pdf
