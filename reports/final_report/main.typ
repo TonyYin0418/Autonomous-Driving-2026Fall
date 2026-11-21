@@ -189,7 +189,7 @@
 
 #figure(
   grid(columns: (1fr, 1fr), column-gutter: 6pt,
-    sub("lidar_on_camera.png", [(a) 激光雷达点]),
+    sub("lidar_on_camera.png", [(a) 激光雷达点，紫色近、黄色远]),
     sub("radar_on_camera.png", [(b) 毫米波雷达点]),
   ),
   caption: [同一帧前视图像上的激光雷达与毫米波雷达投影对比],
@@ -557,7 +557,7 @@ NVIDIA 在 2016 年发表的工作是早期的代表 \[#rl(6)\]，第四次实�
     edge(<b3>, <b4>, "-|>"),
     edge(<b4>, <b5>, "-|>"),
   ),
-  caption: [模块化与端到端自动驾驶的架构对比，虚线框内为一个整体训练的网络],
+  caption: [模块化与端到端自动驾驶的架构对比],
 ) <fig-e2e>
 
 近几年的端到端系统大多输出未来几秒的轨迹，按生成轨迹的方式大致可以分为三类：
